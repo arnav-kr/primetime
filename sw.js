@@ -4,13 +4,14 @@ self.addEventListener('install', function (e) {
     caches.open('slcodepreview').then(function (cache) {
       return cache.addAll([
         './',
-        'https://cdn.jsdelivr.net/gh/AssassinAguilar/Alertism/dist/V1.0.0/main.js',
+        'https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall@latest/dist/pwa-install.min.js',
         'index.html',
         './style.css',
         './script.js',
         './assets/itsprimetime.png',
         './assets/itsprimetime_maskable.png',
         './assets/level_badges.png',
+        './assets/header_image.png',
       ]);
     })
   );
