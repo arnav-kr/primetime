@@ -1,4 +1,4 @@
-var sw_version = "1.0.3";
+var sw_version = "1.0.4";
 
 class Game {
   constructor(level, min, max, questions, timer) {
