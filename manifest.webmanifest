@@ -17,14 +17,14 @@
   "description": "Its Prime Time! | It is a game based on your knowledge about prime numbers. Let's see how much you know about prime numbers.",
   "icons": [
     {
-      "src": "./assets/itsprimetime.png",
-      "sizes": "1024x1024",
+      "src": "./assets/icon.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./assets/itsprimetime_maskable.png",
-      "sizes": "1024x1024",
+      "src": "./assets/icon_maskable.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }

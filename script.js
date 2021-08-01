@@ -1,12 +1,13 @@
 var sw_version = "1.0.2";
 
 class Game {
-  constructor(min, max, questions, timer) {
+  constructor(level, min, max, questions, timer) {
     this.min = min;
     this.max = max;
     this.questions = questions;
     this.timer = timer;
     this.correct = 0;
+    this.level = level;
     this.count = 0;
     this.incorrect = 0;
     this.intervals = [];
@@ -128,6 +129,7 @@ class Game {
     q("#score_percentage").textContent = this.percentile;
   }
   gameOver() {
+    q("#game_level").textContent = this.level;
     q("#total_questions").textContent = this.questions;
     q("#correct_answers").textContent = this.correct;
     q("#wrong_answers").textContent = this.incorrect;
@@ -181,7 +183,8 @@ A(".level") && A(".level").forEach(el => {
   el.addEventListener("click", e => {
     var min = parseInt(el.dataset.config.split("-")[0]);
     var max = parseInt(el.dataset.config.split("-")[1]);
-    game = new Game(min, max, 10, 5);
+    var lvl = el.dataset.level;
+    game = new Game(lvl, min, max, 10, 5);
     game.instructions();
   });
 });

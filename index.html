@@ -20,8 +20,8 @@
     content="Time to test Yor Skills! Prime Time is a game based on your knowledge about prime numbers. Let's see how much you know about prime numbers.">
   <meta name="description"
     content="Its Prime Time! | It is a game based on your knowledge about prime numbers. Let's see how much you know about prime numbers.">
-  <link rel="shortcut icon" href="https://arnav-kr.github.io/primetime/assets/itsprimetime.png" type="image/x-icon">
-  <link rel="apple-touch-icon" href="https://arnav-kr.github.io/primetime/assets/itsprimetime.png">
+  <link rel="shortcut icon" href="https://arnav-kr.github.io/primetime/assets/icon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://arnav-kr.github.io/primetime/assets/icon.png">
   <meta name="keywords"
     content="prime numbers, prime time, its prime time, arnav kumar, arnav-kr, game, web, js, html, css, maths, memory, maths game, logical game, web games, sololearn, best results, most, best, opensource">
   <link rel="manifest" href="manifest.webmanifest">
@@ -40,37 +40,37 @@
     </div>
     <div class="level_cards_wrapper w-100 flex flex-col align-center">
       <div class="levels grid grid-layout" id="levels">
-        <div class="level" data-config="1-100" data-index="0">
+        <div class="level" data-config="1-100" data-index="0" data-level="Easy">
           <div class="dificulty_badge easy"></div>
           <span class="mb-1">Easy</span>
           <span class="mb-1">1 - 100</span>
         </div>
 
-        <div class="level" data-config="100-500" data-index="0">
+        <div class="level" data-config="100-500" data-index="0" data-level="Normal">
           <div class="dificulty_badge normal"></div>
           <span class="mb-1">Normal</span>
           <span class="mb-1">100 - 500</span>
         </div>
 
-        <div class="level" data-config="500-1000" data-index="0">
+        <div class="level" data-config="500-1000" data-index="0" data-level="Dificult">
           <div class="dificulty_badge dificult"></div>
-          <span class="mb-1">Difficult</span>
+          <span class="mb-1">Dificult</span>
           <span class="mb-1">500 - 1000</span>
         </div>
 
-        <div class="level" data-config="1000-5000" data-index="0">
+        <div class="level" data-config="1000-5000" data-index="0" data-level="Hard">
           <div class="dificulty_badge hard"></div>
           <span class="mb-1">Hard</span>
           <span class="mb-1">1000 - 5000</span>
         </div>
 
-        <div class="level" data-config="5000-10000" data-index="0">
+        <div class="level" data-config="5000-10000" data-index="0" data-level="Extreme">
           <div class="dificulty_badge extereme"></div>
           <span class="mb-1">Extreme</span>
           <span class="mb-1">5000 - 10000</span>
         </div>
 
-        <div class="level" data-config="10000-50000" data-index="0">
+        <div class="level" data-config="10000-50000" data-index="0" data-level="Insane">
           <div class="dificulty_badge insane"></div>
           <span class="mb-1">Insane</span>
           <span class="mb-1">10000 - 50000</span>
@@ -103,6 +103,7 @@
   <div hidden id="results">
     <div class="results_header flex align-center flex-col justify-center">
       <h2>Game Over!</h2>
+      <h3 class="game-level">Level: <span id="game_level" class="clr-blue"></span></h3>
       <h3 class="total-questions">Total Questions: <span id="total_questions" class="clr-blue">10</span></h3>
       <h3 class="correct-answers">Correct Answers: <span id="correct_answers" class="clr-green">0</span></h3>
       <h3 class="wrong-answers">Incorrect Answers: <span id="wrong_answers" class="clr-red">0</span></h3>

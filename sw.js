@@ -8,8 +8,8 @@ self.addEventListener('install', function (e) {
         'index.html',
         './style.css',
         './script.js',
-        './assets/itsprimetime.png',
-        './assets/itsprimetime_maskable.png',
+        './assets/icon.png',
+        './assets/icon_maskable.png',
         './assets/level_badges.png',
         './assets/header_image.png',
       ]);
