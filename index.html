@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=7">
+  <meta name="description"
+    content="Its Prime Time! | It is a game based on your knowledge about prime numbers. Let's see how much you know about prime numbers.">
+  <link rel="shortcut icon" href="./assets/itsprimetime.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="./assets/itsprimetime.png">
+  <meta name="keywords"
+    content="prime numbers, prime time, its prime time, arnav kumar, arnav-kr, game, web, js, html, css, maths, memory, maths game, logical game, web games, sololearn, best results, most, best, opensource">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Its Prime Time!</title>
+</head>
+
+<body>
+  <div id="welcome" class="flex align-center flex-col">
+    <div class="welcome_header flex align-center flex-col justify-center">
+      <h2 style="margin-bottom: 0;">Its Prime Time</h2>
+      <h3>Choose a Level to Continue</h3>
+    </div>
+    <div class="level_cards_wrapper w-100 flex flex-col align-center">
+      <div class="levels grid grid-layout" id="levels">
+        <div class="level" data-config="1-100" data-index="0">
+          <div class="dificulty_badge easy"></div>
+          <span class="mb-1">Easy</span>
+          <span class="mb-1">1 - 100</span>
+        </div>
+
+        <div class="level" data-config="100-500" data-index="0">
+          <div class="dificulty_badge normal"></div>
+          <span class="mb-1">Normal</span>
+          <span class="mb-1">100 - 500</span>
+        </div>
+
+        <div class="level" data-config="500-1000" data-index="0">
+          <div class="dificulty_badge dificult"></div>
+          <span class="mb-1">Difficult</span>
+          <span class="mb-1">500 - 1000</span>
+        </div>
+
+        <div class="level" data-config="1000-5000" data-index="0">
+          <div class="dificulty_badge hard"></div>
+          <span class="mb-1">Hard</span>
+          <span class="mb-1">1000 - 5000</span>
+        </div>
+
+        <div class="level" data-config="5000-10000" data-index="0">
+          <div class="dificulty_badge extereme"></div>
+          <span class="mb-1">Extreme</span>
+          <span class="mb-1">5000 - 10000</span>
+        </div>
+
+        <div class="level" data-config="10000-50000" data-index="0">
+          <div class="dificulty_badge insane"></div>
+          <span class="mb-1">Insane</span>
+          <span class="mb-1">10000 - 50000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div hidden id="app" class="w-100 flex align-center flex-col justify-start">
+    <div id="timer" class="timer fixed"></div>
+    <div class="app_wrapper w-100">
+      <!-- <nav id="app_nav" class="w-100">
+        <ul class="no_bullets flex justify-end m-0 mb-1">
+          <li id="report_question" title="Report Question!">
+            <m R class="fs-1 clr-red">warning</m>
+          </li>
+      </nav> -->
+      <div class="play_area flex align-center flex-col w-100">
+        <div class="question flex align-center flex-col w-100 mb-2" id="question">
+          <span class="mb-2 fs-1"><b>Question <span id="question_number" class="clr-blue">0</span></b></span>
+          <span class="mb-1 fw-500 fs-1">Is it prime?</span>
+          <b><span id="ques" class="clr-blue fs-1">43</span></b>
+        </div>
+        <div class="options flex flex-col w-100" id="options">
+          <button class="option option-btn correct-option" data-value="Yes" data-index="0" role="button">Yes</button>
+          <button class="option option-btn" data-value="No" data-index="1" role="button">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div hidden id="results">
+    <div class="results_header flex align-center flex-col justify-center">
+      <h2>Game Over!</h2>
+      <h3 class="total-questions">Total Questions: <span id="total_questions" class="clr-blue">10</span></h3>
+      <h3 class="correct-answers">Correct Answers: <span id="correct_answers" class="clr-green">0</span></h3>
+      <h3 class="wrong-answers">Incorrect Answers: <span id="wrong_answers" class="clr-red">0</span></h3>
+      <h3 class="unattempted-questions">Unattempted: <span id="unattempted_questions" class="clr-orange">0</span></h3>
+      <p class="ta-c fw-500" id="game_over_summary">You were <span id="score_percentage" class="clr-green">100%</span>
+        accurate.</p>
+    </div>
+    <div class="results_buttons flex flex-col align-center">
+      <button done class="option-btn w-100 lets_play_btn correct-option" id="play_again">Play again!</button>
+    </div>
+  </div>
+  <div hidden id="loader" class="loader flex align-center justify-center flex-col fixed">
+    <div class="math_loader fs-monster" id="math_loader">
+      <span class="math_icon">@</span>
+    </div>
+  </div>
+  <div hidden id="instructions" class="instructions">
+    <div class="instructions_header flex align-center flex-col justify-center">
+      <h2>Instructions</h2>
+      <p class="ta-c fw-500">Game is Just simple, you will be given a Number. You have to tell whether its a Prime
+        Number
+        or Not.</p>
+      <p class="ta-c fw-500">Press Yes if it is a Prime Number, else Press No</p>
+    </div>
+    <div class="instructions_buttons flex flex-col align-center">
+      <button done class="option-btn w-100 lets_play_btn correct-option" id="game_start_btn">Lets Play!</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

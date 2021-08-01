@@ -1,0 +1,32 @@
+{
+  "theme_color": "#242a4f",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "orientation": "portrait",
+  "name": "Its Prime Time!",
+  "short_name": "Its Prime Time!",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "game",
+    "maths",
+    "web"
+  ],
+  "description": "Its Prime Time! | It is a game based on your knowledge about prime numbers. Let's see how much you know about prime numbers.",
+  "icons": [
+    {
+      "src": "./assets/itsprimetime.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/itsprimetime_maskable.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
