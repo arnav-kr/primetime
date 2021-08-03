@@ -362,7 +362,7 @@ function range(start, stop, step) {
   return result;
 };
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('./sw.js?v=' + sw_version);
-//   console.log("Service Worker Registered!");
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js?v=' + sw_version);
+  console.log("Service Worker Registered!");
+}
