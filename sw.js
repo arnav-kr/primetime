@@ -1,4 +1,4 @@
-self.skipWaiting();
+self.skipWaiting(); 
 self.addEventListener('install', function (e) {
   e.waitUntil(
     caches.open('slcodepreview').then(function (cache) {
