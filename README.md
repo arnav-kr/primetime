@@ -12,4 +12,4 @@ Lets see are you a prime master?
 
 ![image](https://user-images.githubusercontent.com/72879799/128041199-df55bbde-bc3d-4b1b-9825-94e6946715e9.png)
 
-![image](https://user-images.githubusercontent.com/72879799/128041293-6ab58965-e1b8-4424-9108-fb3193e22126.png)
+![arnav-kr github io_primetime_](https://user-images.githubusercontent.com/72879799/128041997-bbef5938-33ef-4f79-9567-c29643e34cc7.png)
