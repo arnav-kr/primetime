@@ -68,6 +68,13 @@ class Game {
       this.unattempted += 1;
       this.count += 1;
       this.user_answers.push(null);
+      let qes = this.data_questions[this.data_questions - 1];
+      if (isPrime(parseInt(qes))) {
+        this.solutions.push(true);
+      }
+      else {
+        this.solutions.push(false);
+      }
       this.intervals[0] = setTimeout(() => {
         this.generateQuestion();
       }, 500);
@@ -141,38 +148,38 @@ class Game {
     this.percentile = Math.round((this.correct / this.questions) * 100);
     q("#score_percentage").textContent = this.percentile;
   }
-  calculateReview(d, type) {
+  calculateReview(d, type, extra) {
     if (type == "icon") {
+      if (extra !== undefined && (d === null || extra === null)) {
+        return "info";
+      }
       if (d == true) {
         return "check_circle";
       }
       if (d == false) {
         return "cancel";
       }
-      if (d == null) {
-        return "info";
-      }
     }
     if (type == "color") {
+      if (extra !== undefined && (d === null || extra === null)) {
+        return "orange";
+      }
       if (d == true) {
         return "green";
       }
       if (d == false) {
         return "red";
       }
-      if (d == null) {
-        return "orange";
-      }
     }
     if (type == "text") {
+      if (extra !== undefined && (d === null || extra === null)) {
+        return "Nothing";
+      }
       if (d == true) {
         return "Yes";
       }
       if (d == false) {
         return "No";
-      }
-      if (d == null) {
-        return "Nothing";
       }
     }
   }
@@ -184,7 +191,7 @@ class Game {
     q("#unattempted_questions").textContent = this.unattempted;
     q("#score_percentage").textContent = this.percentile + "%";
     if (this.percentile == 100) {
-      q("#game_over_summary").textContent += " Congo! You are a Prime Matser. (Not Crime master! lol)";
+      q("#game_over_summary").innerHTML += " Congo! You are a Prime Matser.";
     }
     q("#reviews_container").innerHTML = "";
     for (var x in this.data_questions) {
@@ -193,12 +200,12 @@ class Game {
       let fac = this.getFactors(this.data_questions[x]);
       var temp = `
       <div class="review_item_header flex align-center">
-        <m class="m-0 p-0 fs-1 clr-${this.calculateReview(this.user_answers[x] == this.solutions[x], "color")}">${this.calculateReview(this.user_answers[x] == this.solutions[x], "icon")}</m>
-      <span class="review_q_no fs--1" > Question ${parseInt(x) + 1}</span >
+        <m class="m-0 p-0 fs-1 clr-${this.calculateReview(this.user_answers[x] == this.solutions[x], "color", this.user_answers[x])}">${this.calculateReview(this.user_answers[x] == this.solutions[x], "icon", this.user_answers[x])}</m>
+      <span class="review_q_no fs--1" > Question ${parseInt(x) + 1}</span>
       </div >
       <div class="review_details">
         <h3 class="review_question">Question: <span class="rev_q_v clr-blue">${this.data_questions[x]}</span></h3>
-        <h3 class="review_your_ans">Your Answer: <span class="rev_y_a clr-${this.calculateReview(this.user_answers[x] == this.solutions[x], "color")}">${this.calculateReview(this.user_answers[x], "text")}</span></h3>
+        <h3 class="review_your_ans">Your Answer: <span class="rev_y_a clr-${this.calculateReview(this.user_answers[x] == this.solutions[x], "color", this.user_answers[x])}">${this.calculateReview(this.user_answers[x], "text", this.user_answers[x])}</span></h3>
         <h3 class="review_correct_ans">Correct Answer: <span class="rev_c_a clr-green">${this.calculateReview(this.solutions[x], "text")}</span></h3>
         <button done class="option-btn detailed_solution correct-option" onclick="game.showDetailedExplation(event)">Detailed Solution</button>
       </div>
@@ -362,7 +369,7 @@ function range(start, stop, step) {
   return result;
 };
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js?v=' + sw_version);
-  console.log("Service Worker Registered!");
-}
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('./sw.js?v=' + sw_version);
+//   console.log("Service Worker Registered!");
+// }
