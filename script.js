@@ -23,7 +23,7 @@ class Game {
     min = Math.ceil(min);
     max = Math.floor(max);
     var num = Math.floor(Math.random() * (max - min + 1) + min);
-    if (num % 2 == 0) {
+    if (num % 2 == 0 || num == 1 || num <= 0) {
       return this.pseudoRandom(min, max);
     }
     else {
