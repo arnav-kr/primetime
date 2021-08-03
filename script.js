@@ -1,10 +1,13 @@
-var sw_version = "1.0.4";
+var sw_version = "1.0.5";
 
 class Game {
   constructor(level, min, max, questions, timer) {
     this.min = min;
     this.max = max;
     this.questions = questions;
+    this.data_questions = [];
+    this.user_answers = [];
+    this.solutions = [];
     this.timer = timer;
     this.correct = 0;
     this.level = level;
@@ -14,7 +17,7 @@ class Game {
     this.unattempted = 0;
     this.percentile = 0;
     this.timer = timer;
-    this.currectPage = "welcome";
+    this.currentpage = "welcome";
   }
   pseudoRandom(min, max) {
     min = Math.ceil(min);
@@ -40,6 +43,7 @@ class Game {
     }
     var qes = this.pseudoRandom(this.min, this.max);
     q("#ques").textContent = qes;
+    this.data_questions.push(parseInt(qes));
     A(".option").forEach(el => {
       el.removeAttribute("done", "true");
       el.classList.remove("correct-option");
@@ -63,6 +67,7 @@ class Game {
     if (e == "cat") {
       this.unattempted += 1;
       this.count += 1;
+      this.user_answers.push(null);
       this.intervals[0] = setTimeout(() => {
         this.generateQuestion();
       }, 500);
@@ -80,7 +85,14 @@ class Game {
       el.setAttribute("done", "true");
       el.disabled = true;
     });
+    if (opt.dataset.index == 0) {
+      this.user_answers.push(true);
+    }
+    else {
+      this.user_answers.push(false);
+    }
     if (isPrime(parseInt(ans))) {
+      this.solutions.push(true);
       if (opt.dataset.index == 0) {
         opt.classList.add("correct-option");
         this.correct += 1;
@@ -96,6 +108,7 @@ class Game {
       }, 500);
     }
     else {
+      this.solutions.push(false);
       if (opt.dataset.index == 1) {
         opt.classList.add("correct-option");
         this.correct += 1;
@@ -128,6 +141,41 @@ class Game {
     this.percentile = Math.round((this.correct / this.questions) * 100);
     q("#score_percentage").textContent = this.percentile;
   }
+  calculateReview(d, type) {
+    if (type == "icon") {
+      if (d == true) {
+        return "check_circle";
+      }
+      if (d == false) {
+        return "cancel";
+      }
+      if (d == null) {
+        return "info";
+      }
+    }
+    if (type == "color") {
+      if (d == true) {
+        return "green";
+      }
+      if (d == false) {
+        return "red";
+      }
+      if (d == null) {
+        return "orange";
+      }
+    }
+    if (type == "text") {
+      if (d == true) {
+        return "Yes";
+      }
+      if (d == false) {
+        return "No";
+      }
+      if (d == null) {
+        return "Nothing";
+      }
+    }
+  }
   gameOver() {
     q("#game_level").textContent = this.level;
     q("#total_questions").textContent = this.questions;
@@ -138,6 +186,35 @@ class Game {
     if (this.percentile == 100) {
       q("#game_over_summary").textContent += " Congo! You are a Prime Matser. (Not Crime master! lol)";
     }
+    q("#reviews_container").innerHTML = "";
+    for (var x in this.data_questions) {
+      var el = document.createElement("div");
+      el.className = "review_item flex flex-col align-start justify-start";
+      let fac = this.getFactors(this.data_questions[x]);
+      var temp = `
+      <div class="review_item_header flex align-center">
+        <m class="m-0 p-0 fs-1 clr-${this.calculateReview(this.user_answers[x] == this.solutions[x], "color")}">${this.calculateReview(this.user_answers[x] == this.solutions[x], "icon")}</m>
+      <span class="review_q_no fs--1" > Question ${parseInt(x) + 1}</span >
+      </div >
+      <div class="review_details">
+        <h3 class="review_question">Question: <span class="rev_q_v clr-blue">${this.data_questions[x]}</span></h3>
+        <h3 class="review_your_ans">Your Answer: <span class="rev_y_a clr-${this.calculateReview(this.user_answers[x] == this.solutions[x], "color")}">${this.calculateReview(this.user_answers[x], "text")}</span></h3>
+        <h3 class="review_correct_ans">Correct Answer: <span class="rev_c_a clr-green">${this.calculateReview(this.solutions[x], "text")}</span></h3>
+        <button done class="option-btn detailed_solution correct-option" onclick="game.showDetailedExplation(event)">Detailed Solution</button>
+      </div>
+      <div hidden class="review_detailed_solution w-100">
+        <div class="review_d_header flex w-100 justify-end">
+          <m R class="p-0 review_close_btn" onclick="game.hideDetailedExplation(event)">close</m>
+        </div>
+        <div class="review_detail_math">
+          <span class="rev_math_num">Factors of ${this.data_questions[x]} = </span><span class="rev_factors">${fac.join(", ")}</span><br /><br />
+          <div class="review_output_statement">Since ${this.data_questions[x]} has ${(() => fac.length > 2 ? "more than 2 factors, It is not a prime number." : "only 2 factors, i.e. 1 and " + this.data_questions[x] + " itself, It is a prime number.")()}</div>
+        </div>
+      </div>
+    `;
+      el.innerHTML = temp;
+      q("#reviews_container").appendChild(el);
+    }
     this.navigate("results");
   }
   instructions() {
@@ -147,16 +224,43 @@ class Game {
     this.generateQuestion();
     this.navigate("app");
   }
+  showDetailedExplation(e) {
+    var exp = e.target.closest(".review_item").querySelector(".review_detailed_solution");
+    var btn = e.target.closest(".review_item").querySelector(".detailed_solution");
+    exp.hidden = false;
+    btn.hidden = true;
+  }
+  hideDetailedExplation(e) {
+    var exp = e.target.closest(".review_item").querySelector(".review_detailed_solution");
+    var btn = e.target.closest(".review_item").querySelector(".detailed_solution");
+    exp.hidden = true;
+    btn.hidden = false;
+  }
   navigate(page) {
-    if (this.currectPage == page) {
+    if (this.currentpage == page) {
       return;
     }
-    q("#" + this.currectPage).hidden = true;
+    q("#" + this.currentpage).hidden = true;
     q("#" + page).hidden = false;
-    this.currectPage = page;
+    this.currentpage = page;
   }
   resetTimer() {
     q("#timer").style.width = "100%";
+  }
+  getFactors(num) {
+    let val = parseInt(num), factors = [];
+    for (let i = 0; i <= val; i++) {
+      // if (i == 1) {
+      //   factors.push(1);
+      // }
+      // if (i == val) {
+      //   factors.push(val);
+      // }
+      if (val % i == 0) {
+        factors.push(i);
+      }
+    }
+    return [...new Set(factors)];
   }
   setTimer(seconds, callback) {
     var totalTime = seconds * 1000;
@@ -164,7 +268,7 @@ class Game {
     this.timeInterval = setInterval(() => {
       remainingTime -= 10;
       var percent = remainingTime / totalTime * 100
-      q("#timer").style.width = `${percent}%`;
+      q("#timer").style.width = `${percent}% `;
     }, 10)
     this.timeOut = setTimeout(() => {
       try {
@@ -195,6 +299,14 @@ q("#game_start_btn").addEventListener("click", e => {
 
 q("#play_again").addEventListener("click", e => {
   game.reset();
+});
+
+q("#review_answers").addEventListener("click", e => {
+  game.navigate("review");
+});
+
+q("#review-go_back").addEventListener("click", e => {
+  game.navigate("results")
 });
 
 A(".option").forEach(el => {
@@ -250,7 +362,7 @@ function range(start, stop, step) {
   return result;
 };
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js?v=' + sw_version);
-  console.log("Service Worker Registered!");
-}
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('./sw.js?v=' + sw_version);
+//   console.log("Service Worker Registered!");
+// }

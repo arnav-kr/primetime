@@ -102,6 +102,19 @@
       </div>
     </div>
   </div>
+  <div hidden class="review flex flex-col align-center" id="review">
+    <div class="review_nav flex flex-start">
+      <button class="review_go_back option-btn correct-option" id="review-go_back">
+        <m R>arrow_back_ios_new</m> Back
+      </button>
+    </div>
+    <div class="review_wrapper w-100 flex flex-col">
+      <div class="review_header flex align-center flex-col">
+        <h2>Review Your Answers</h2>
+      </div>
+      <div class="reviews_container" id="reviews_container"></div>
+    </div>
+  </div>
   <div hidden id="results">
     <div class="results_header flex align-center flex-col justify-center">
       <h2>Game Over!</h2>
@@ -114,12 +127,9 @@
         accurate.</p>
     </div>
     <div class="results_buttons flex flex-col align-center">
+      <button done class="option-btn w-100 review_answer_btn correct-option" id="review_answers">Review
+        Answers!</button>
       <button done class="option-btn w-100 lets_play_btn correct-option" id="play_again">Play again!</button>
-    </div>
-  </div>
-  <div hidden id="loader" class="loader flex align-center justify-center flex-col fixed">
-    <div class="math_loader fs-monster" id="math_loader">
-      <span class="math_icon">@</span>
     </div>
   </div>
   <div hidden id="instructions" class="instructions">
