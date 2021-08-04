@@ -4,6 +4,7 @@ self.addEventListener('install', function (e) {
     caches.open('slcodepreview').then(function (cache) {
       return cache.addAll([
         './',
+        './privacy-policies/',
         'https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall@latest/dist/pwa-install.min.js',
         'index.html',
         './style.css',
