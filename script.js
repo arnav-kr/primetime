@@ -1,4 +1,4 @@
-var sw_version = "1.0.8";
+var sw_version = "1.0.9";
 
 class Game {
   constructor(level, min, max, questions, timer) {
@@ -369,7 +369,7 @@ function range(start, stop, step) {
   return result;
 };
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('./sw.js?v=' + sw_version);
-//   console.log("Service Worker Registered!");
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js?v=' + sw_version);
+  console.log("Service Worker Registered!");
+}
